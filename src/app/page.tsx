@@ -9,56 +9,46 @@ export default async function Home() {
   const session = await getServerAuthSession();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+    <div className="bg-gray-100 min-h-screen">
+    <nav className="bg-white shadow-lg">
+      <div className="max-w-screen-lg mx-auto py-4 px-8 flex justify-between items-center">
+        <h1 className="text-2xl font-bold">Tarotarot</h1>
+        <div>
           <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
+          href={session ? "/api/auth/signout" : "/api/auth/signin"}
+          className="text-blue-500 hover:underline"
           >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
+          {session ? "Sign out" : "Sign in"}
           </Link>
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
+      </div>
+    </nav>
 
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center text-2xl text-white">
-              {session && <span>Logged in as {session.user?.name}</span>}
-            </p>
-            <Link
-              href={session ? "/api/auth/signout" : "/api/auth/signin"}
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-            >
-              {session ? "Sign out" : "Sign in"}
-            </Link>
-          </div>
-        </div>
+    <main className="max-w-screen-lg mx-auto p-8 bg-white rounded shadow-md mt-8">
+      <h1 className="text-4xl font-bold text-center mb-6">Your Gateway to Mystical Wisdom</h1>
+      <p className="text-gray-600 text-center mb-8">
+        Tarotarot connects you with experienced psychics for insightful readings.
+      </p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <Link 
+        href="/readings" 
+        className="bg-blue-500 hover:bg-blue-600 text-white rounded-lg py-3 px-4 text-center"
+        >
+        Get a Reading
+        </Link>
+
+        <Link 
+        href="/about" 
+        className="bg-gray-200 hover:bg-gray-300 text-gray-600 rounded-lg py-3 px-4 text-center"
+        >
+        About Us
+        </Link>
 
         <CrudShowcase />
       </div>
     </main>
+  </div>
   );
 }
 
